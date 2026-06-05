@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ZenBreath — Cohérence Cardiaque</title>
+  <meta name="description" content="Guidez votre respiration avec ZenBreath pour réduire le stress et retrouver la sérénité." />
+  <meta name="theme-color" content="#1a3a4a" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ==================== VUE ACCUEIL ==================== -->
+  <section id="view-home" class="view active">
+
+    <!-- Vidéo de fond -->
+    <video id="bg-video" autoplay muted loop playsinline>
+      <source src="assets/videos/plage.mp4" type="video/mp4" />
+    </video>
+    <div class="video-overlay"></div>
+
+    <!-- Contenu principal -->
+    <div class="home-content">
+      <h1 class="app-title">ZenBreath</h1>
+      <p class="app-subtitle">Retrouvez la sérénité en quelques respirations</p>
+
+      <div class="settings-card">
+
+        <!-- Choix du paysage -->
+        <div class="setting-group">
+          <label class="setting-label">🌅 Paysage</label>
+          <div class="btn-group" id="landscape-group">
+            <button class="btn-option active" data-value="plage">🏖️ Plage</button>
+            <button class="btn-option" data-value="foret">🌿 Forêt</button>
+            <button class="btn-option" data-value="montagne">🏔️ Montagne</button>
+          </div>
+        </div>
+
+        <!-- Choix du son -->
+        <div class="setting-group">
+          <label class="setting-label">🎵 Ambiance sonore</label>
+          <div class="btn-group" id="sound-group">
+            <button class="btn-option active" data-value="vagues">🌊 Vagues</button>
+            <button class="btn-option" data-value="oiseaux">🐦 Oiseaux</button>
+            <button class="btn-option" data-value="foret-ambiance">🌲 Forêt</button>
+            <button class="btn-option" data-value="musique">🎶 Musique</button>
+          </div>
+        </div>
+
+        <!-- Choix de la durée -->
+        <div class="setting-group">
+          <label class="setting-label">⏱️ Durée : <span id="duration-display">5 min</span></label>
+          <input type="range" id="duration-slider" min="1" max="6" value="5" step="1" />
+          <div class="slider-ticks">
+            <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span>
+          </div>
+        </div>
+
+        <!-- Choix du rythme -->
+        <div class="setting-group">
+          <label class="setting-label">🫁 Rythme de respiration</label>
+          <div class="btn-group rhythm-group" id="rhythm-group">
+            <button class="btn-option active" data-value="4-4" title="Inspirez 4s / Expirez 4s">
+              Débutant<br/><small>4 – 4</small>
+            </button>
+            <button class="btn-option" data-value="5-5" title="Inspirez 5s / Expirez 5s">
+              Cardiaque<br/><small>5 – 5</small>
+            </button>
+            <button class="btn-option" data-value="4-6" title="Inspirez 4s / Expirez 6s">
+              Relaxation<br/><small>4 – 6</small>
+            </button>
+            <button class="btn-option" data-value="4-7-8" title="Inspirez 4s / Retenez 7s / Expirez 8s">
+              Apaisement<br/><small>4 – 7 – 8</small>
+            </button>
+          </div>
+        </div>
+
+        <!-- Volume -->
+        <div class="setting-group volume-group">
+          <label class="setting-label">🔊 Volume</label>
+          <input type="range" id="volume-slider" min="0" max="100" value="60" step="5" />
+        </div>
+
+        <!-- Boutons d'action -->
+        <div class="home-actions">
+          <button id="btn-start" class="btn-primary">Commencer la session</button>
+          <button id="btn-history" class="btn-secondary">📊 Mon historique</button>
+        </div>
+
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ==================== VUE SESSION ==================== -->
+  <section id="view-session" class="view">
+
+    <!-- Même vidéo de fond -->
+    <video id="session-bg-video" autoplay muted loop playsinline></video>
+    <div class="video-overlay"></div>
+
+    <div class="session-content">
+
+      <!-- Header session -->
+      <div class="session-header">
+        <button id="btn-quit" class="btn-icon" title="Quitter">✕</button>
+        <div class="session-info">
+          <span id="session-rhythm-label"></span>
+        </div>
+      </div>
+
+      <!-- Minuteur global -->
+      <div class="timer-bar-wrapper">
+        <div class="timer-bar"><div id="timer-progress" class="timer-fill"></div></div>
+        <span id="timer-label">--:--</span>
+      </div>
+
+      <!-- Cercle de respiration -->
+      <div class="breath-wrapper">
+        <div id="breath-circle" class="breath-circle">
+          <div class="breath-inner">
+            <p id="breath-phase-label">Préparez-vous</p>
+            <p id="breath-countdown"></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cycles complétés -->
+      <p id="cycles-count" class="cycles-label">0 cycle complété</p>
+
+    </div>
+  </section>
+
+  <!-- ==================== VUE FIN DE SESSION ==================== -->
+  <section id="view-complete" class="view">
+    <video id="complete-bg-video" autoplay muted loop playsinline></video>
+    <div class="video-overlay"></div>
+
+    <div class="complete-content">
+      <div class="complete-card">
+        <div class="complete-icon">🌟</div>
+        <h2>Bravo !</h2>
+        <p id="complete-message"></p>
+
+        <div class="complete-stats">
+          <div class="stat-item">
+            <span class="stat-value" id="stat-duration"></span>
+            <span class="stat-label">durée</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-value" id="stat-cycles"></span>
+            <span class="stat-label">cycles</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-value" id="stat-rhythm"></span>
+            <span class="stat-label">rythme</span>
+          </div>
+        </div>
+
+        <div class="complete-actions">
+          <button id="btn-replay" class="btn-primary">🔄 Rejouer</button>
+          <button id="btn-share" class="btn-secondary">📤 Partager</button>
+          <button id="btn-go-home" class="btn-secondary">🏠 Accueil</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== VUE HISTORIQUE ==================== -->
+  <section id="view-history" class="view">
+    <div class="history-content">
+
+      <div class="history-header">
+        <button id="btn-back-home" class="btn-icon">←</button>
+        <h2>Mon historique</h2>
+      </div>
+
+      <!-- Stats globales -->
+      <div class="global-stats">
+        <div class="gstat-item">
+          <span class="gstat-value" id="gstat-total-sessions">0</span>
+          <span class="gstat-label">sessions</span>
+        </div>
+        <div class="gstat-item">
+          <span class="gstat-value" id="gstat-total-minutes">0</span>
+          <span class="gstat-label">minutes</span>
+        </div>
+        <div class="gstat-item">
+          <span class="gstat-value" id="gstat-week-sessions">0</span>
+          <span class="gstat-label">cette semaine</span>
+        </div>
+        <div class="gstat-item">
+          <span class="gstat-value" id="gstat-fav-rhythm">–</span>
+          <span class="gstat-label">rythme favori</span>
+        </div>
+      </div>
+
+      <!-- Notifications -->
+      <div class="notif-section">
+        <label class="notif-label">🔔 Rappel quotidien</label>
+        <div class="notif-controls">
+          <input type="time" id="notif-time" value="08:00" />
+          <button id="btn-notif" class="btn-secondary btn-small">Activer</button>
+        </div>
+        <p id="notif-status" class="notif-status"></p>
+      </div>
+
+      <!-- Liste des sessions -->
+      <div class="sessions-list" id="sessions-list">
+        <p class="empty-state">Aucune session pour l'instant.<br/>Lancez votre première respiration ! 🌬️</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Audio -->
+  <audio id="ambient-audio" loop></audio>
+  <audio id="end-audio" src="assets/sounds/end-chime.mp3"></audio>
+
+  <script src="script.js"></script>
+</body>
+</html>
