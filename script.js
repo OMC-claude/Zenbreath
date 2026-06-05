@@ -24,11 +24,11 @@ const RHYTHMS = {
 // Noms lisibles des phases
 const PHASE_NAMES = ['Inspirez', 'Retenez', 'Expirez'];
 
-// Sources des médias — remplacez par vos fichiers téléchargés
+// Sources des médias — URLs directes Pexels (libres de droits)
 const VIDEOS = {
-  plage:    'assets/videos/plage.mp4',
-  foret:    'assets/videos/foret.mp4',
-  montagne: 'assets/videos/montagne.mp4',
+  plage:    'https://videos.pexels.com/video-files/14606894/14606894-uhd_2730_1440_30fps.mp4',
+  foret:    'https://videos.pexels.com/video-files/1448735/1448735-uhd_2732_1440_24fps.mp4',
+  montagne: 'https://videos.pexels.com/video-files/27936608/12267571_2560_1440_25fps.mp4',
 };
 
 const SOUNDS = {
