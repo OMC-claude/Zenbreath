@@ -24,18 +24,19 @@ const RHYTHMS = {
 // Noms lisibles des phases
 const PHASE_NAMES = ['Inspirez', 'Retenez', 'Expirez'];
 
-// Sources des médias — URLs directes Pexels (libres de droits)
+// Vidéos de fond — Pixabay CDN (libres de droits, cross-origin autorisé)
 const VIDEOS = {
-  plage:    'https://videos.pexels.com/video-files/14606894/14606894-uhd_2730_1440_30fps.mp4',
-  foret:    'https://videos.pexels.com/video-files/1448735/1448735-uhd_2732_1440_24fps.mp4',
-  montagne: 'https://videos.pexels.com/video-files/27936608/12267571_2560_1440_25fps.mp4',
+  plage:    'https://cdn.pixabay.com/video/2023/04/26/160561-821392610_large.mp4',
+  foret:    'https://cdn.pixabay.com/video/2021/08/04/83880-585600454_large.mp4',
+  montagne: 'https://cdn.pixabay.com/video/2022/03/21/111508-691222995_large.mp4',
 };
 
+// Sons d'ambiance — chemin corrigé selon la structure GitHub
 const SOUNDS = {
-  vagues:         'assets/sounds/vagues.mp3',
-  oiseaux:        'assets/sounds/oiseaux.mp3',
-  'foret-ambiance': 'assets/sounds/foret-ambiance.mp3',
-  musique:        'assets/sounds/musique.mp3',
+  vagues:           'assets/assets/sounds/vagues.mp3',
+  oiseaux:          'assets/assets/sounds/oiseaux.mp3',
+  'foret-ambiance': 'assets/assets/sounds/foret-ambiance.mp3',
+  musique:          'assets/assets/sounds/musique.mp3',
 };
 
 // =====================================================
